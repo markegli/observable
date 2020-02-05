@@ -337,6 +337,28 @@ void main() {
       });
     });
 
+    test('cast then []=', () {
+      final casted = map.cast<Pattern, num>();
+      casted['a'] = 42;
+      expect(map, {'a': 42, 'b': 2});
+
+      casted['c'] = 3;
+      expect(map, {'a': 42, 'b': 2, 'c': 3});
+
+      return Future(() {
+        expect(
+            records,
+            changeMatchers([
+              _changeKey('a', 1, 42),
+              _propChange(map, #values),
+              _lengthChange(map, 2, 3),
+              _insertKey('c', 3),
+              _propChange(map, #keys),
+              _propChange(map, #values),
+            ]));
+      });
+    });
+
     test('remove', () {
       map.remove('b');
       expect(map, {'a': 1});

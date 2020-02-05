@@ -241,6 +241,21 @@ void main() {
       });
     });
 
+    test('cast then add', () {
+      list.cast<num>()..add(5)..add(6);
+      expect(list, orderedEquals([1, 2, 3, 1, 3, 4, 5, 6]));
+
+      return Future(() {
+        expect(
+            propRecords,
+            changeMatchers([
+              _lengthChange(6, 7),
+              _lengthChange(7, 8),
+            ]));
+        expect(listRecords, [_change(6, addedCount: 2)]);
+      });
+    });
+
     test('[]=', () {
       list[1] = list.last;
       expect(list, orderedEquals([1, 4, 3, 1, 3, 4]));

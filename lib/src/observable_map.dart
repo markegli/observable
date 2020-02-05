@@ -7,6 +7,7 @@ library observable.src.observable_map;
 
 import 'dart:collection';
 
+import 'cast_observable_map.dart';
 import 'observable.dart';
 import 'records.dart';
 import 'to_observable.dart';
@@ -34,10 +35,8 @@ class ObservableMap<K, V> extends Observable implements Map<K, V> {
   /// all entries added to the returned map have [K] keys and [V] values, then
   /// the returned map can be used as a `Map<K2, V2>`.
   static ObservableMap<K2, V2> castFrom<K, V, K2, V2>(
-    ObservableMap<K, V> source,
-  ) {
-    return ObservableMap<K2, V2>.spy(source._map.cast<K2, V2>());
-  }
+          ObservableMap<K, V> source) =>
+      source.cast<K2, V2>();
 
   final Map<K, V> _map;
 
@@ -174,16 +173,13 @@ class ObservableMap<K, V> extends Observable implements Map<K, V> {
   String toString() => MapBase.mapToString(this);
 
   @override
-  ObservableMap<K2, V2> cast<K2, V2>() {
-    return ObservableMap.castFrom<K, V, K2, V2>(this);
-  }
+  ObservableMap<K2, V2> cast<K2, V2>() =>
+      CastObservableMap<K, V, K2, V2>.cast(this);
 
   @deprecated
   @override
   // ignore: override_on_non_overriding_method
-  ObservableMap<K2, V2> retype<K2, V2>() {
-    return ObservableMap.castFrom<K, V, K2, V2>(this);
-  }
+  ObservableMap<K2, V2> retype<K2, V2>() => cast<K2, V2>();
 
   @override
   Iterable<MapEntry<K, V>> get entries => _map.entries;

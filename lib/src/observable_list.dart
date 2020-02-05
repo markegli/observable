@@ -8,6 +8,7 @@ library observable.src.observable_list;
 import 'dart:async';
 import 'dart:collection' show ListBase, UnmodifiableListView;
 
+import 'cast_observable_list.dart';
 import 'differs.dart';
 import 'records.dart';
 import 'observable.dart' show Observable;
@@ -28,7 +29,7 @@ class ObservableList<E> extends ListBase<E> with Observable {
   /// and if all elements stored into the returned list are actually instance
   /// of [S], then the returned list can be used as a `ObservableList<T>`.
   static ObservableList<T> castFrom<S, T>(ObservableList<S> source) =>
-      ObservableList<T>._spy(source._list.cast<T>());
+      source.cast<T>();
 
   List<ListChangeRecord<E>> _listRecords;
 
@@ -59,8 +60,6 @@ class ObservableList<E> extends ListBase<E> with Observable {
   /// the list will be the order provided by the iterator of [other].
   ObservableList.from(Iterable other) : _list = List<E>.from(other);
 
-  ObservableList._spy(List<E> other) : _list = other;
-
   /// Returns a view of this list as a list of [T] instances.
   ///
   /// If this list contains only instances of [T], all read operations
@@ -72,7 +71,7 @@ class ObservableList<E> extends ListBase<E> with Observable {
   /// and they must be instances of [E] as well to be accepted by
   /// this list as well.
   @override
-  ObservableList<T> cast<T>() => ObservableList.castFrom<E, T>(this);
+  ObservableList<T> cast<T>() => CastObservableList<E, T>.cast(this);
 
   /// Returns a view of this list as a list of [T] instances.
   ///
