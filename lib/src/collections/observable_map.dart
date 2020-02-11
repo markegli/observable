@@ -3,14 +3,12 @@
 // BSD-style license that can be found in the LICENSE file.
 
 // ignore_for_file: deprecated_member_use_from_same_package
-library observable.src.observable_map;
+library observable.src.collections.observable_map;
 
 import 'dart:collection';
 
+import 'package:observable/observable.dart';
 import 'cast_observable_map.dart';
-import 'observable.dart';
-import 'records.dart';
-import 'to_observable.dart';
 
 // TODO(jmesserly): this needs to be faster. We currently require multiple
 // lookups per key to get the old value.

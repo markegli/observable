@@ -3,15 +3,14 @@
 // BSD-style license that can be found in the LICENSE file.
 
 // ignore_for_file: deprecated_member_use_from_same_package
-library observable.src.observable_list;
+library observable.src.collections.observable_list;
 
 import 'dart:async';
 import 'dart:collection' show ListBase, UnmodifiableListView;
 
+import 'package:observable/observable.dart';
+import 'package:observable/src/differs.dart';
 import 'cast_observable_list.dart';
-import 'differs.dart';
-import 'records.dart';
-import 'observable.dart' show Observable;
 
 /// Represents an observable list of model values. If any items are added,
 /// removed, or replaced, then observers that are listening to [changes]

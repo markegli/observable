@@ -1,7 +1,6 @@
 import 'package:collection/collection.dart';
 
-import 'records.dart';
-import 'observable_list.dart';
+import 'package:observable/observable.dart';
 
 /// A view of an [ObservableList] as a list of [E] instances.
 ///

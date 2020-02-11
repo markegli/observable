@@ -1,7 +1,6 @@
 import 'package:collection/collection.dart';
 
-import 'records.dart';
-import 'observable_map.dart';
+import 'package:observable/observable.dart';
 
 /// A view of an [ObservableMap] as a map of [K] keys and [V] values.
 ///
